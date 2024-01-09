@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+apply from: '../root.gradle'
+apply plugin: 'com.google.gms.google-services'
+dependencies {
+
+    api project(':yelectronics-network')
+
+    api "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
+    api "androidx.fragment:fragment:${androidXFragmentVersion}"
+}

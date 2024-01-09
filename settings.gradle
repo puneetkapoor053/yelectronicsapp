@@ -1,0 +1,4 @@
+rootProject.name = "Y Electronics"
+include ':app'
+include ':yelectronics-ui'
+include ':yelectronics-network'

@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply from: '../root.gradle'
+apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+
+    api "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    api "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingVersion}"
+
+    api("com.squareup.retrofit2:retrofit:${retrofitVersion}") {
+        exclude module: 'okhttp'
+        transitive = true
+    }
+
+    api "com.squareup.retrofit2:converter-jackson:${retrofitVersion}"
+
+    api "androidx.preference:preference-ktx:${preference}"
+
+    testImplementation "androidx.arch.core:core-testing:${core_testing}"
+}

@@ -1,0 +1,48 @@
+ext {
+    androidMinSdkVersion = 28
+    androidTargetSdkVersion = 34
+    compileSdkVersion = 34
+    androidBuildToolsVersion = '34.0.0'
+    androidPluginVersion = '7.4.2'
+
+    // Testing
+    mockitoLibraryVersion = '3.2.0'
+    mockkLibraryVersion = '1.10.0'
+    assertJLibraryVersion = '1.7.1'
+    jUnitVersion = '4.12'
+    testRunnerVersion = '1.2.0'
+    junitParamsLibraryVersion = '1.0.6'
+    jUnitExtVersion = '1.1.1'
+
+    //Network
+    retrofitVersion = '2.3.0'
+    okhttpVersion = '4.4.0'
+    okhttpLoggingVersion = '4.4.0'
+
+    //View
+    appCompactVersion = '1.3.1'
+    constraintLayoutVersion = '2.1.0'
+    viewModelVersion = '2.1.0'
+    recyclerViewVersion = '1.1.0'
+    materialVersion = '1.4.0'
+
+    rxJavaVersion = '2.2.8'
+    rxAndroidVersion = '2.1.1'
+    jacksonLibraryVersion = '2.11.2'
+    androidXFragmentVersion = "1.1.0"
+    androidXLifecycle = "2.2.0"
+    lifecycle_version = "2.1.0"
+
+    //Kotlin
+    kotlinVersion = '1.5.10'
+    kotlinCore = "1.2.0"
+
+    //HILT
+    hilt_version = "2.42"
+
+    preference = "1.1.1"
+
+    glideVersion = '4.12.0'
+
+    core_testing = "2.0.0"
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950868836589",
+    "project_id": "ecommerceapp-b77e7",
+    "storage_bucket": "ecommerceapp-b77e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950868836589:android:4bbb971a22858572cb0ce4",
+        "android_client_info": {
+          "package_name": "com.ycompany.yelectronics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3JHgtpHjcDWBCmGg5ljgpn55GQ9SGAhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
