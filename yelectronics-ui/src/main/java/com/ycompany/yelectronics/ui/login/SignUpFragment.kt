@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.ui.databinding.SignUpFragmentBinding
+import com.ycompany.yelectronics.ui.home.HomeActivity
+import com.ycompany.yelectronics.utils.Constants
 import com.ycompany.yelectronics.utils.Extensions.toast
 import com.ycompany.yelectronics.utils.ProgressLoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,16 +63,18 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>() {
                     activity?.applicationContext?.let { toast("Sign Up Successfully", it) }
                     progressLoadingDialog.dismissDialog()
 
+                    sharedPreferences.edit().remove(Constants.PREF_USERNAME).apply()
+                    sharedPreferences.edit().putString(Constants.PREF_USERNAME, binding?.emailSignUpEditText?.text.toString()).apply()
 
-                    //val user = User(fullname,"",firebaseAuth.uid.toString(),emailV,"","")
+                    progressLoadingDialog.dismissDialog()
+                    activity?.applicationContext?.let { toast("Signed in successfully", it) }
 
-                    //storeUserData(user)
-
-//                    val intent = Intent(this, HomeActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
+                    val intent = Intent(context, HomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
                 } else {
                     progressLoadingDialog.dismissDialog()
+                    sharedPreferences.edit().remove(Constants.PREF_USERNAME).apply()
                     activity?.applicationContext?.let { toast("failed to Authenticate !", it) }
                 }
             }

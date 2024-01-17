@@ -7,9 +7,10 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
     <item name="android:windowIsTranslucent">true</item>/>
     </style>
 </resources>

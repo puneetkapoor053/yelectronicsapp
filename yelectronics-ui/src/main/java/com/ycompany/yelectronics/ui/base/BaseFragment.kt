@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.ycompany.yelectronics.utils.ProgressLoadingDialog
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected var binding: T? = null

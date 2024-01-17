@@ -1,4 +1,4 @@
-package com.ycompany.yelectronics.ui.injections;
+package com.ycompany.yelectronics.injections;
 
 import androidx.lifecycle.ViewModel;
 

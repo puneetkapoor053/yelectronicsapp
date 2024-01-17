@@ -1,4 +1,4 @@
-package com.ycompany.yelectronics.ui.injections
+package com.ycompany.yelectronics.injections
 
 import android.content.Context
 import android.content.SharedPreferences

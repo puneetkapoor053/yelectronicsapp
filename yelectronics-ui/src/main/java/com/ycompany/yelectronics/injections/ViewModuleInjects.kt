@@ -1,8 +1,9 @@
-package com.ycompany.yelectronics.ui.injections
+package com.ycompany.yelectronics.injections
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.ycompany.yelectronics.network.repository.ProductHighlightRepository
 import com.ycompany.yelectronics.ui.home.HomeViewModel
 import com.ycompany.yelectronics.ui.login.LoginViewModel
 import dagger.Module
@@ -25,7 +26,10 @@ object ViewModuleInjects {
     @Provides
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun homeViewModel(sharedPreferences: SharedPreferences): ViewModel {
-        return HomeViewModel(sharedPreferences)
+    fun homeViewModel(
+        sharedPreferences: SharedPreferences,
+        productHighlightRepository: ProductHighlightRepository
+    ): ViewModel {
+        return HomeViewModel(sharedPreferences, productHighlightRepository)
     }
 }

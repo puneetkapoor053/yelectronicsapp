@@ -22,6 +22,6 @@ class ProgressLoadingDialog(private val activity: Activity) {
     }
 
     fun dismissDialog() {
-        dialog!!.dismiss()
+        dialog?.dismiss()
     }
 }

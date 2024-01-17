@@ -12,7 +12,7 @@ class CustomProfileAdapter(private val mList: List<ProfileDataModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_design, parent, false)
+            .inflate(R.layout.profile_card_view_design, parent, false)
 
         return ViewHolder(view)
     }
