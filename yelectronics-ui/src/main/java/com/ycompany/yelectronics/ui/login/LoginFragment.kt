@@ -16,7 +16,7 @@ import com.ycompany.yelectronics.ui.R
 import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.ui.databinding.LoginFragmentBinding
 import com.ycompany.yelectronics.ui.home.HomeActivity
-import com.ycompany.yelectronics.ui.injections.CustomViewModelFactory
+import com.ycompany.yelectronics.injections.CustomViewModelFactory
 import com.ycompany.yelectronics.utils.Constants
 import com.ycompany.yelectronics.utils.Extensions.toast
 import com.ycompany.yelectronics.utils.ProgressLoadingDialog

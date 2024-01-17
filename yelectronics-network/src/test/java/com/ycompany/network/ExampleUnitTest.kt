@@ -1,4 +1,4 @@
-package com.ycompany.yelectronics_network
+package com.ycompany.network
 
 import org.junit.Test
 

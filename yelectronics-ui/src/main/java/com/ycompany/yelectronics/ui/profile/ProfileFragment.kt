@@ -11,7 +11,7 @@ import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.ui.databinding.HomeFragmentBinding
 import com.ycompany.yelectronics.ui.databinding.ProfileFragmentBinding
 import com.ycompany.yelectronics.ui.home.HomeActivity
-import com.ycompany.yelectronics.ui.injections.CustomViewModelFactory
+import com.ycompany.yelectronics.injections.CustomViewModelFactory
 import com.ycompany.yelectronics.ui.login.LoginActivity
 import com.ycompany.yelectronics.ui.login.LoginViewModel
 import com.ycompany.yelectronics.utils.Constants
@@ -46,7 +46,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
                 activity?.applicationContext?.let { toast("My Orders Clicked", it) }
             }
             signOutLayout.setOnClickListener{
-                activity?.applicationContext?.let { toast("My Orders Clicked", it) }
+                activity?.applicationContext?.let { toast("SignOut Clicked", it) }
                 loginViewModel.signOutUser()
                 sharedPreferences.edit().remove(Constants.PREF_USERNAME).apply()
 

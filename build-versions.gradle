@@ -37,6 +37,8 @@ ext {
     kotlinVersion = '1.5.10'
     kotlinCore = "1.2.0"
 
+    room_version = "2.6.1"
+
     //HILT
     hilt_version = "2.42"
 

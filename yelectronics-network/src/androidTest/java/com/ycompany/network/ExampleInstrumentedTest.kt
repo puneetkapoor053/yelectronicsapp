@@ -1,4 +1,4 @@
-package com.ycompany.yelectronics_network
+package com.ycompany.network
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

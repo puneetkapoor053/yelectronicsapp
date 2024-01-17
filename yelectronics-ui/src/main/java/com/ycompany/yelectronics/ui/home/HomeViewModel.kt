@@ -1,12 +1,25 @@
 package com.ycompany.yelectronics.ui.home
 
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ycompany.yelectronics.network.dto.Product
+import com.ycompany.yelectronics.network.repository.ProductHighlightRepository
+import com.ycompany.yelectronics.network.usecase.ProductHighlightUseCase
 import com.ycompany.yelectronics.utils.Constants
+import com.ycompany.yelectronics.viewmodel.StateLiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(private val sharedPreferences: SharedPreferences) :
-    ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val sharedPreferences: SharedPreferences,
+    private val productHighlightRepository: ProductHighlightRepository
+) : ViewModel() {
+
+    private val productHighlightLiveData: StateLiveData<List<Product>> = StateLiveData()
+    private val productsLiveData: StateLiveData<List<Product>> = StateLiveData()
 
     fun getUserName(): String {
         return if (sharedPreferences.getString(Constants.PREF_USERNAME, null)
@@ -16,5 +29,39 @@ class HomeViewModel @Inject constructor(private val sharedPreferences: SharedPre
         } else {
             sharedPreferences.getString(Constants.PREF_USERNAME, null).toString()
         }
+    }
+
+    fun getProductHighlightList(context: Context) {
+        productHighlightLiveData.postLoading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = productHighlightRepository.getListOfHighlightProducts(context)
+                productHighlightLiveData.postSuccess(result as List<Product>)
+            } catch (exception: Exception) {
+                productHighlightLiveData.postError(exception)
+            }
+        }
+    }
+
+    fun getProductsList(context: Context) {
+        productsLiveData.postLoading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val result = productHighlightRepository.getListOfHighlightProducts(context)
+                productsLiveData.postSuccess(result as List<Product>)
+            } catch (exception: Exception) {
+                productsLiveData.postError(exception)
+            }
+        }
+    }
+
+    fun productHighlightObservable(): StateLiveData<List<Product>> {
+        return productHighlightLiveData
+    }
+
+    fun productsObservable(): StateLiveData<List<Product>> {
+        return productsLiveData
     }
 }

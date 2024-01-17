@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#85DB22</color>
+    <color name="non_selected">#A2A2A2</color>
     <color name="background">#17181A</color>
     <color name="backgroundAd">#21242B</color>
     <color name="error">#F01F0E</color>
