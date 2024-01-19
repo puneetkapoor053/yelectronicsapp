@@ -59,7 +59,7 @@ class ProductsAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
-        val productAddToFav: ImageView = itemView.findViewById(R.id.product_add_to_fav)
+      //  val productAddToFav: ImageView = itemView.findViewById(R.id.product_add_to_fav)
         val productRating: RatingBar = itemView.findViewById(R.id.product_rating)
         val productBrandName: TextView = itemView.findViewById(R.id.product_brand_name)
         val discountProductText: TextView = itemView.findViewById(R.id.discount_product_text)

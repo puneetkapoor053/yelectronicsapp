@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ycompany.yelectronics.injections.CustomViewModelFactory
 import com.ycompany.yelectronics.network.dto.Product
 import com.ycompany.yelectronics.ui.R
 import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.ui.databinding.HomeFragmentBinding
+import com.ycompany.yelectronics.ui.productdetails.ProductDetailsFragment.Companion.KEY_PRODUCT
 import com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration
 import com.ycompany.yelectronics.utils.Extensions
 import com.ycompany.yelectronics.utils.ProgressLoadingDialog
@@ -22,7 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeFragmentBinding>(), OnProductClickListener {
+class HomeFragment : BaseFragment<HomeFragmentBinding>(),
+    OnProductClickListener {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -58,13 +63,23 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(), OnProductClickListener
                 LinearLayoutManager.HORIZONTAL, false
             )
             highlightRecyclerView.setHasFixedSize(true)
-            highlightRecyclerView.setScrollIndicators(View.SCROLL_INDICATOR_BOTTOM)
+
+            newProductsRecyclerView.layoutManager =
+                GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
+            newProductsRecyclerView.setHasFixedSize(true)
+            newProductsRecyclerView.isNestedScrollingEnabled = false
         }
         homeViewModel.productHighlightObservable().observe(
             viewLifecycleOwner, processProductHighlightData()
         )
+        homeViewModel.productsObservable().observe(
+            viewLifecycleOwner, processNewProductsData()
+        )
 
         homeViewModel.getProductHighlightList(requireContext())
+        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation?.visibility = View.VISIBLE
+
     }
 
     private fun processProductHighlightData(): (t: StateData<List<Product>>?) -> Unit = {
@@ -75,24 +90,62 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(), OnProductClickListener
                 }
 
                 StateData.DataStatus.SUCCESS -> {
-                    progressLoadingDialog.dismissDialog()
-                    setProductHighlightsRecyclerView(it.getData())
-                    activity?.applicationContext?.let { context ->
-                        Extensions.toast(
-                            "Highlight Product List Fetched successfully",
-                            context
-                        )
+                    //progressLoadingDialog.dismissDialog()
+                    setProductHighlightsRecyclerView(it.getData()).run {
+                        homeViewModel.getNewProductsList(requireContext())
                     }
+//                    activity?.applicationContext?.let { context ->
+//                        Extensions.toast(
+//                            "Highlight Product List Fetched successfully",
+//                            context
+//                        )
+//                    }
                 }
 
                 StateData.DataStatus.ERROR -> {
                     progressLoadingDialog.dismissDialog()
-                    activity?.applicationContext?.let { context ->
-                        Extensions.toast(
-                            it.getError()?.message.toString(),
-                            context
-                        )
-                    }
+//                    activity?.applicationContext?.let { context ->
+//                        Extensions.toast(
+//                            it.getError()?.message.toString(),
+//                            context
+//                        )
+//                    }
+                }
+
+                else -> {
+                    progressLoadingDialog.dismissDialog()
+                    activity?.applicationContext?.let { Extensions.toast("Sign in failed", it) }
+                }
+            }
+        }
+    }
+
+    private fun processNewProductsData(): (t: StateData<List<Product>>?) -> Unit = {
+        if (it != null) {
+            when (it.getStatus()) {
+                StateData.DataStatus.LOADING -> {
+                    //progressLoadingDialog.startLoadingDialog("Please wait!!")
+                }
+
+                StateData.DataStatus.SUCCESS -> {
+                    progressLoadingDialog.dismissDialog()
+                    setProductsRecyclerView(it.getData())
+//                    activity?.applicationContext?.let { context ->
+//                        Extensions.toast(
+//                            "New Product List Fetched successfully",
+//                            context
+//                        )
+//                    }
+                }
+
+                StateData.DataStatus.ERROR -> {
+                    progressLoadingDialog.dismissDialog()
+//                    activity?.applicationContext?.let { context ->
+//                        Extensions.toast(
+//                            it.getError()?.message.toString(),
+//                            context
+//                        )
+//                    }
                 }
 
                 else -> {
@@ -108,8 +161,13 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(), OnProductClickListener
             val productHighlightAdapter = ProductHighlightAdapter(this, data)
             binding?.highlightRecyclerView?.adapter = productHighlightAdapter
             binding?.highlightRecyclerView?.addItemDecoration(
-                CirclePagerIndicatorDecoration(ContextCompat.getColor(requireContext(), R.color.primary))
+                CirclePagerIndicatorDecoration(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.primary
+                    )
                 )
+            )
         }
     }
 
@@ -117,25 +175,14 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(), OnProductClickListener
         data?.let {
             val productsAdapter = ProductsAdapter(this, data)
             binding?.newProductsRecyclerView?.adapter = productsAdapter
-            binding?.newProductsRecyclerView?.addItemDecoration(
-                CirclePagerIndicatorDecoration(ContextCompat.getColor(requireContext(), R.color.primary))
-            )
         }
     }
 
-    companion object {
-        fun getInstance(): HomeFragment {
-            return HomeFragment()
+    override fun onProductClick(product: Product) {
+        activity?.applicationContext?.let {
+            val args = Bundle()
+            args.putParcelable(KEY_PRODUCT, product)
+            findNavController().navigate(R.id.action_productDetails, args)
         }
-    }
-
-    override fun onProductClick(productHighlight: Product) {
-        activity?.applicationContext?.let { context ->
-            Extensions.toast(
-                productHighlight.productName,
-                context
-            )
-        }
-
     }
 }

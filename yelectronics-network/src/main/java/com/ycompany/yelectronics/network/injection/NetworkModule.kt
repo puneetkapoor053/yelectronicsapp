@@ -5,7 +5,10 @@ import android.content.res.AssetManager
 import androidx.room.Room
 import com.google.gson.Gson
 import com.ycompany.yelectronics.network.database.AppDatabase
+import com.ycompany.yelectronics.network.database.CartDao
+import com.ycompany.yelectronics.network.database.FavoriteDao
 import com.ycompany.yelectronics.network.database.ProductHighlightDao
+import com.ycompany.yelectronics.network.database.ProductsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,4 +46,21 @@ class NetworkModule {
         return appDatabase.productHighlightDao()
     }
 
+    @Provides
+    @Singleton
+    fun providesProductsDao(appDatabase: AppDatabase): ProductsDao {
+        return appDatabase.productsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesFavoriteDao(appDatabase: AppDatabase): FavoriteDao {
+        return appDatabase.favoriteDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesCartDao(appDatabase: AppDatabase): CartDao {
+        return appDatabase.cartDao()
+    }
 }
