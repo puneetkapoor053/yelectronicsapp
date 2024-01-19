@@ -9,11 +9,11 @@ import androidx.room.Query
 interface ProductHighlightDao {
 
     @Query("SELECT * FROM product_highlight_items")
-    fun getAllProductHighlightLists(): List<ProductHighlightEntity>
+    suspend fun getAllProductHighlightLists(): List<ProductHighlightEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllProductHighlightLists(list: List<ProductHighlightEntity>)
 
     @Query("DELETE FROM product_highlight_items")
-    fun deleteAllProductHighlights()
+    suspend fun deleteAllProductHighlights()
 }

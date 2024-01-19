@@ -3,7 +3,15 @@ package com.ycompany.yelectronics.network.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [ProductHighlightEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [ProductHighlightEntity::class, ProductsEntity::class, FavoriteEntity::class,
+               CartEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productHighlightDao(): ProductHighlightDao
+    abstract fun productsDao(): ProductsDao
+    abstract fun favoriteDao(): FavoriteDao
+    abstract fun cartDao(): CartDao
 }

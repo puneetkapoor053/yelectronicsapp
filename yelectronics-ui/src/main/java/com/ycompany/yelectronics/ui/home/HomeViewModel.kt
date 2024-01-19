@@ -5,8 +5,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ycompany.yelectronics.network.dto.Product
-import com.ycompany.yelectronics.network.repository.ProductHighlightRepository
-import com.ycompany.yelectronics.network.usecase.ProductHighlightUseCase
+import com.ycompany.yelectronics.network.repository.ProductsRepository
 import com.ycompany.yelectronics.utils.Constants
 import com.ycompany.yelectronics.viewmodel.StateLiveData
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
-    private val productHighlightRepository: ProductHighlightRepository
+    private val productsRepository: ProductsRepository
 ) : ViewModel() {
 
     private val productHighlightLiveData: StateLiveData<List<Product>> = StateLiveData()
@@ -36,7 +35,7 @@ class HomeViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = productHighlightRepository.getListOfHighlightProducts(context)
+                val result = productsRepository.getListOfHighlightProducts(context)
                 productHighlightLiveData.postSuccess(result as List<Product>)
             } catch (exception: Exception) {
                 productHighlightLiveData.postError(exception)
@@ -44,12 +43,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getProductsList(context: Context) {
-        productsLiveData.postLoading()
-
+    fun getNewProductsList(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = productHighlightRepository.getListOfHighlightProducts(context)
+                val result = productsRepository.getListOfNewProducts(context)
                 productsLiveData.postSuccess(result as List<Product>)
             } catch (exception: Exception) {
                 productsLiveData.postError(exception)

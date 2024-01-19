@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: '../root.gradle'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'com.google.firebase.crashlytics'
 android {
     compileSdkVersion androidTargetSdkVersion
     buildToolsVersion androidBuildToolsVersion
