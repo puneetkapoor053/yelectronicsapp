@@ -94,22 +94,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
                     setProductHighlightsRecyclerView(it.getData()).run {
                         homeViewModel.getNewProductsList(requireContext())
                     }
-//                    activity?.applicationContext?.let { context ->
-//                        Extensions.toast(
-//                            "Highlight Product List Fetched successfully",
-//                            context
-//                        )
-//                    }
                 }
 
                 StateData.DataStatus.ERROR -> {
                     progressLoadingDialog.dismissDialog()
-//                    activity?.applicationContext?.let { context ->
-//                        Extensions.toast(
-//                            it.getError()?.message.toString(),
-//                            context
-//                        )
-//                    }
                 }
 
                 else -> {
@@ -130,22 +118,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
                 StateData.DataStatus.SUCCESS -> {
                     progressLoadingDialog.dismissDialog()
                     setProductsRecyclerView(it.getData())
-//                    activity?.applicationContext?.let { context ->
-//                        Extensions.toast(
-//                            "New Product List Fetched successfully",
-//                            context
-//                        )
-//                    }
                 }
 
                 StateData.DataStatus.ERROR -> {
                     progressLoadingDialog.dismissDialog()
-//                    activity?.applicationContext?.let { context ->
-//                        Extensions.toast(
-//                            it.getError()?.message.toString(),
-//                            context
-//                        )
-//                    }
                 }
 
                 else -> {

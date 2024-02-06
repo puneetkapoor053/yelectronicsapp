@@ -22,7 +22,15 @@
         android:id="@+id/profileFragment"
         android:name="com.ycompany.yelectronics.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+
+        <action
+            android:id="@+id/action_orderList"
+            app:destination="@id/orderDetailsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.ycompany.yelectronics.ui.cart.CartFragment"
@@ -54,4 +62,20 @@
             app:destination="@id/productDetailsFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.ycompany.yelectronics.ui.cart.OrderDetailsFragment"
+        android:label="fragment_my_second"
+        tools:layout="@layout/orders_details_fragment">
+<!--        <argument-->
+<!--            android:name="arg3"-->
+<!--            app:argType="com.ycompany.yelectronics.network.dto.Product"-->
+<!--            app:nullable="true" />-->
+<!--        <action-->
+<!--            android:id="@+id/actionDetails"-->
+<!--            app:destination="@id/productDetailsFragment" />-->
+
+    </fragment>
+
 </navigation>

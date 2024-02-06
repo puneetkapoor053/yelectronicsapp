@@ -2,11 +2,20 @@ package com.ycompany.yelectronics.ui.login
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.ycompany.yelectronics.network.repository.CartRepository
+import com.ycompany.yelectronics.network.repository.FavoritesRepository
 import com.ycompany.yelectronics.viewmodel.StateLiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val favoritesRepository: FavoritesRepository,
+    private val cartRepository: CartRepository
+) : ViewModel() {
 
     private val singInLiveData: StateLiveData<Boolean> = StateLiveData()
     private val signInAnonymously: StateLiveData<Boolean> = StateLiveData()
@@ -34,7 +43,11 @@ class LoginViewModel @Inject constructor(private val firebaseAuth: FirebaseAuth)
     }
 
     fun signOutUser() {
-        firebaseAuth.signOut()
+        viewModelScope.launch(Dispatchers.IO) {
+            firebaseAuth.signOut()
+            favoritesRepository.deleteAllFavorites()
+            cartRepository.deleteAllCartItems()
+        }
     }
 
     fun singInLiveDataObservable(): StateLiveData<Boolean> {

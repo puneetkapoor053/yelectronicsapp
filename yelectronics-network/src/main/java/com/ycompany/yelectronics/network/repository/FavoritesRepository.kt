@@ -20,4 +20,8 @@ class FavoritesRepository @Inject constructor(
     suspend fun deleteFavorite(productId: String) {
         return favoriteDao.removeFavoriteProduct(productId)
     }
+
+    suspend fun deleteAllFavorites() {
+        return favoriteDao.deleteAllFavoritesProducts()
+    }
 }

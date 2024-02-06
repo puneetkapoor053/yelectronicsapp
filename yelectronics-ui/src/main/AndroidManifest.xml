@@ -13,8 +13,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.SignUpActivity"/>
-        <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".login.SignUpActivity" />
+        <activity android:name=".home.HomeActivity" />
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

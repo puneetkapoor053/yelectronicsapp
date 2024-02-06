@@ -13,6 +13,7 @@ import com.ycompany.yelectronics.injections.CustomViewModelFactory
 import com.ycompany.yelectronics.network.dto.Product
 import com.ycompany.yelectronics.ui.R
 import com.ycompany.yelectronics.ui.base.BaseFragment
+import com.ycompany.yelectronics.ui.cart.OrderListAdapter
 import com.ycompany.yelectronics.ui.databinding.FavoriteFragmentBinding
 import com.ycompany.yelectronics.ui.home.OnProductClickListener
 import com.ycompany.yelectronics.ui.home.ProductsAdapter
@@ -96,16 +97,24 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding>(), OnProductClick
 
     private fun setFavoriteProductsRecyclerView(data: List<Product>?) {
         data?.let {
-            val productsAdapter = ProductsAdapter(this, data)
-            binding?.favoritesRecyclerView?.adapter = productsAdapter
+            if (data.isEmpty()) {
+                binding?.emptyFavoritesLayout?.visibility = View.VISIBLE
+                binding?.favoritesRecyclerView?.visibility = View.GONE
+                binding?.animationViewNoFav?.playAnimation()
+                binding?.animationViewNoFav?.loop(true)
+            } else {
+                binding?.emptyFavoritesLayout?.visibility = View.GONE
+                binding?.favoritesRecyclerView?.visibility = View.VISIBLE
+                binding?.animationViewNoFav?.pauseAnimation()
+                val productsAdapter = ProductsAdapter(this, data)
+                binding?.favoritesRecyclerView?.adapter = productsAdapter
+            }
         }
     }
 
     override fun onProductClick(product: Product) {
-        activity?.applicationContext?.let {
-            val args = Bundle()
-            args.putParcelable(ProductDetailsFragment.KEY_PRODUCT, product)
-            findNavController().navigate(R.id.action_favoriteFragment_productDetails, args)
-        }
+        val args = Bundle()
+        args.putParcelable(ProductDetailsFragment.KEY_PRODUCT, product)
+        findNavController().navigate(R.id.action_favoriteFragment_productDetails, args)
     }
 }
