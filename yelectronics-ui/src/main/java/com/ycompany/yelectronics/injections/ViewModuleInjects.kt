@@ -23,8 +23,12 @@ object ViewModuleInjects {
     @Provides
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    fun loginViewModel(firebaseAuth: FirebaseAuth): ViewModel {
-        return LoginViewModel(firebaseAuth)
+    fun loginViewModel(
+        firebaseAuth: FirebaseAuth,
+        favoritesRepository: FavoritesRepository,
+        cartRepository: CartRepository
+    ): ViewModel {
+        return LoginViewModel(firebaseAuth, favoritesRepository, cartRepository)
     }
 
     @Provides
@@ -51,8 +55,9 @@ object ViewModuleInjects {
     @IntoMap
     @ViewModelKey(CartViewModel::class)
     fun cartViewModel(
-        cartRepository: CartRepository
+        cartRepository: CartRepository,
+        sharedPreferences: SharedPreferences
     ): ViewModel {
-        return CartViewModel(cartRepository)
+        return CartViewModel(cartRepository, sharedPreferences)
     }
 }

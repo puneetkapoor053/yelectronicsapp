@@ -17,8 +17,17 @@ interface CartDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg product: CartEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrder(vararg order: OrdersListEntity)
+
+    @Query("SELECT * FROM orders_list ORDER BY date_of_order DESC")
+    fun getAllOrders(): List<OrdersListEntity>
+
     @Delete
     suspend fun delete(product: CartEntity)
+
+    @Query("DELETE FROM cart_items")
+    suspend fun deleteAll()
 
     @Update
     suspend fun update(vararg product: CartEntity)
