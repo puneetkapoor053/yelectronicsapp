@@ -3,7 +3,6 @@ package com.ycompany.yelectronics.network.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.ycompany.yelectronics.network.dto.Product
 
 @Entity(tableName = "favorite_items")
 data class FavoriteEntity(

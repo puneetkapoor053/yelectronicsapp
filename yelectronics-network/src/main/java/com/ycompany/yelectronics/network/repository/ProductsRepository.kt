@@ -1,6 +1,7 @@
 package com.ycompany.yelectronics.network.repository
 
 import android.content.Context
+import com.ycompany.yelectronics.network.R
 import com.ycompany.yelectronics.network.database.ProductHighlightDao
 import com.ycompany.yelectronics.network.database.ProductHighlightEntity
 import com.ycompany.yelectronics.network.database.ProductsDao
@@ -8,6 +9,7 @@ import com.ycompany.yelectronics.network.database.ProductsEntity
 import com.ycompany.yelectronics.network.dto.Product
 import com.ycompany.yelectronics.network.usecase.ProductsUseCase
 import com.ycompany.yelectronics.network.utils.NetworkUtils
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,44 +17,51 @@ import javax.inject.Singleton
 class ProductsRepository @Inject constructor(
     private val productsUseCase: ProductsUseCase,
     private val productHighlightDao: ProductHighlightDao,
-    private val productsDao: ProductsDao
+    private val productsDao: ProductsDao,
+    @ApplicationContext private val context: Context
 ) {
 
-    suspend fun getListOfHighlightProducts(context: Context): Any {
+    suspend fun getListOfHighlightProducts(): Any {
         return try {
             if (NetworkUtils.isDeviceOnline(context)) {
                 return productsUseCase.getProductHighlightList("CoverProducts.json")
-            } else if (productHighlightDao.getAllProductHighlightLists().isNotEmpty()) {
+            }
+
+            val cacheList = productHighlightDao.getAllProductHighlightLists()
+            if (cacheList.isNotEmpty()) {
                 // No Internet but Data Present in the cache.
-                return productHighlightDao.getAllProductHighlightLists().map {
+                return cacheList.map {
                     Product.toHighlightDTO(it)
                 }
             } else {
-                Throwable("Please connect to the internet")
+                Throwable(context.getString(R.string.please_connect_to_the_internet))
             }
         } catch (exception: Exception) {
-            Throwable("Please connect to the internet")
+            Throwable(context.getString(R.string.please_connect_to_the_internet))
         }
     }
 
-    suspend fun getListOfNewProducts(context: Context): Any {
+    suspend fun getListOfNewProducts(): Any {
         return try {
             if (NetworkUtils.isDeviceOnline(context)) {
                 return productsUseCase.getAllNewProducts("NewProducts.json")
-            } else if (productsDao.getAllNewProducts().isNotEmpty()) {
+            }
+
+            val cacheList = productsDao.getAllNewProducts()
+            if (cacheList.isNotEmpty()) {
                 // No Internet but Data Present in the cache.
-                return productsDao.getAllNewProducts().map {
+                return cacheList.map {
                     Product.toProductDTO(it)
                 }
             } else {
-                Throwable("Please connect to the internet")
+                Throwable(context.getString(R.string.please_connect_to_the_internet))
             }
         } catch (exception: Exception) {
-            Throwable(exception.message)
+            Throwable(context.getString(R.string.please_connect_to_the_internet))
         }
     }
 
-   suspend fun getAllNewProducts(): List<ProductsEntity> {
+    suspend fun getAllNewProducts(): List<ProductsEntity> {
         return productsDao.getAllNewProducts()
     }
 

@@ -13,6 +13,8 @@ ext {
     testRunnerVersion = '1.2.0'
     junitParamsLibraryVersion = '1.0.6'
     jUnitExtVersion = '1.1.1'
+    coreTestingVersion = '2.1.0'
+    coroutinesVersion = '1.6.0'
 
     //Network
     retrofitVersion = '2.3.0'
@@ -46,5 +48,5 @@ ext {
 
     glideVersion = '4.12.0'
 
-    core_testing = "2.0.0"
+    core_testing = "2.1.0"
 }

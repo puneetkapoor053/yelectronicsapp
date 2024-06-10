@@ -12,8 +12,9 @@ import com.razorpay.Checkout
 import com.razorpay.PaymentData
 import com.ycompany.yelectronics.injections.CustomViewModelFactory
 import com.ycompany.yelectronics.network.database.CartEntity
-import com.ycompany.yelectronics.network.database.Orders
 import com.ycompany.yelectronics.network.database.OrdersListEntity
+import com.ycompany.yelectronics.network.dto.Orders
+import com.ycompany.yelectronics.ui.BuildConfig
 import com.ycompany.yelectronics.ui.R
 import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.ui.databinding.CartFragmentBinding
@@ -66,7 +67,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>(), CartItemClickListener,
             cartRecyclerView.setHasFixedSize(true)
             cartRecyclerView.isNestedScrollingEnabled = false
             emptyCartUpdate()
-            checkOutBagPage.setOnClickListener {
+            checkoutBag.setOnClickListener {
                 initiatePayment()
             }
         }
@@ -80,9 +81,9 @@ class CartFragment : BaseFragment<CartFragmentBinding>(), CartItemClickListener,
     }
 
     private fun initiatePayment() {
-        //Checkout.preload(requireContext())
         val checkout = Checkout()
-        checkout.setKeyID("rzp_test_v04yDeAqTfuKrC")
+        //For Production, need to use PRod key from BuildConfig.
+        checkout.setKeyID(BuildConfig.RAZORPAY_DEV_KEY_ID)
         // set image
         checkout.setImage(R.drawable.yelectronics_logo)
 
@@ -117,7 +118,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>(), CartItemClickListener,
 
                 else -> {
                     progressLoadingDialog.dismissDialog()
-                    activity?.applicationContext?.let { Extensions.toast("Sign in failed", it) }
+                    activity?.applicationContext?.let { Extensions.toast("Please try again later!", it) }
                 }
             }
         }

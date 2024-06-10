@@ -22,25 +22,25 @@ class CirclePagerIndicatorDecoration(@ColorInt colorInactive: Int) :
      * Height of the space the indicator takes up at the bottom of the view.
      */
     private val mIndicatorHeight: Int =
-        (com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration.Companion.DP * 16).toInt()
+        (DP * 16).toInt()
 
     /**
      * Indicator stroke width.
      */
     private val mIndicatorStrokeWidth: Float =
-        com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration.Companion.DP * 4
+        DP * 4
 
     /**
      * Indicator width.
      */
     private val mIndicatorItemLength: Float =
-        com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration.Companion.DP * 4
+        DP * 4
 
     /**
      * Padding between indicators.
      */
     private val mIndicatorItemPadding: Float =
-        com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration.Companion.DP * 8
+        DP * 8
 
     /**
      * Some more natural animation interpolation
@@ -92,7 +92,7 @@ class CirclePagerIndicatorDecoration(@ColorInt colorInactive: Int) :
         val progress = mInterpolator.getInterpolation(left * -1 / width.toFloat())
         if (isRtlLanguage) {
             indicatorStartX =
-                (parent.width + indicatorTotalWidth) / 2f - (mIndicatorItemLength + com.ycompany.yelectronics.utils.CirclePagerIndicatorDecoration.Companion.DP * 4) / 2
+                (parent.width + indicatorTotalWidth) / 2f - (mIndicatorItemLength + DP * 4) / 2
         }
 
         //        float indicatorStartXhl = (parent.getWidth() + indicatorTotalWidth) / 2F - (mIndicatorItemLength + DP * 4) / 2;

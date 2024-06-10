@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ycompany.yelectronics.ui.base.BaseFragment
 import com.ycompany.yelectronics.databinding.SplashFragmentBinding
+import com.ycompany.yelectronics.network.BuildConfig
 import com.ycompany.yelectronics.ui.home.HomeActivity
 import com.ycompany.yelectronics.ui.login.LoginActivity
 import com.ycompany.yelectronics.utils.Constants
@@ -36,24 +37,21 @@ class SplashFragment : BaseFragment<SplashFragmentBinding>() {
     }
 
     private fun animateIntro() {
-        view?.let {
-            it.animate()
-                .alpha(1f)
-                .setDuration(2000)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        launchModule()
-                    }
-                })
-        }
+        view?.animate()?.alpha(1f)?.setDuration(2000)
+            ?.setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    launchModule()
+                }
+            })
     }
 
     private fun launchModule() {
-        val intent: Intent = if (sharedPreferences.getString(Constants.PREF_USERNAME, null) == null) {
-            Intent(activity, LoginActivity::class.java)
-        } else {
-            Intent(activity, HomeActivity::class.java)
-        }
+        val intent: Intent =
+            if (sharedPreferences.getString(Constants.PREF_USERNAME, null) == null) {
+                Intent(activity, LoginActivity::class.java)
+            } else {
+                Intent(activity, HomeActivity::class.java)
+            }
         startActivity(intent)
         activity?.finish()
     }

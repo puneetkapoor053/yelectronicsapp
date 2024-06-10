@@ -3,7 +3,7 @@ package com.ycompany.yelectronics.network.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
+import com.ycompany.yelectronics.network.dto.Orders
 
 @Entity(tableName = "orders_list")
 data class OrdersListEntity(

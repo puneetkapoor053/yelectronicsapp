@@ -1,6 +1,5 @@
 package com.ycompany.yelectronics.network.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -12,7 +11,7 @@ import androidx.room.Update
 interface CartDao {
 
     @Query("SELECT * FROM cart_items order by rowId desc")
-    fun getAllCartItems(): List<CartEntity>
+    suspend fun getAllCartItems(): List<CartEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg product: CartEntity)
@@ -21,13 +20,16 @@ interface CartDao {
     suspend fun insertOrder(vararg order: OrdersListEntity)
 
     @Query("SELECT * FROM orders_list ORDER BY date_of_order DESC")
-    fun getAllOrders(): List<OrdersListEntity>
+    suspend fun getAllOrders(): List<OrdersListEntity>
 
     @Delete
     suspend fun delete(product: CartEntity)
 
     @Query("DELETE FROM cart_items")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM orders_list")
+    suspend fun deleteAllOrders()
 
     @Update
     suspend fun update(vararg product: CartEntity)

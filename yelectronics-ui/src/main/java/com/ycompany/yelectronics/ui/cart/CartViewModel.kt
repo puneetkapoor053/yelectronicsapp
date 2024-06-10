@@ -18,6 +18,7 @@ class CartViewModel @Inject constructor(
     private val cartRepository: CartRepository,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
+
     private val cartListLiveData: StateLiveData<List<CartEntity>> = StateLiveData()
     private val ordersListLiveData: StateLiveData<List<OrdersListEntity>> = StateLiveData()
 

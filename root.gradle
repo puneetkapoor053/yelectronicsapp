@@ -12,6 +12,8 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", 'RAZORPAY_DEV_KEY_ID', yelectronics_razorpay_dev_key_id
     }
 
     buildFeatures {
@@ -42,7 +44,8 @@ dependencies {
     testImplementation "io.mockk:mockk:${mockkLibraryVersion}"
     testImplementation "org.assertj:assertj-core:${assertJLibraryVersion}"
     testImplementation "pl.pragmatists:JUnitParams:${junitParamsLibraryVersion}"
-
+    testImplementation "androidx.arch.core:core-testing:${coreTestingVersion}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesVersion}"
     androidTestImplementation "androidx.test:runner:${testRunnerVersion}"
 
     api "com.google.dagger:hilt-android:${hilt_version}"

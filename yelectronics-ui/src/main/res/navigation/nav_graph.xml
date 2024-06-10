@@ -57,9 +57,6 @@
             android:name="arg3"
             app:argType="com.ycompany.yelectronics.network.dto.Product"
             app:nullable="true" />
-        <action
-            android:id="@+id/actionDetails"
-            app:destination="@id/productDetailsFragment" />
 
     </fragment>
 
@@ -68,13 +65,6 @@
         android:name="com.ycompany.yelectronics.ui.cart.OrderDetailsFragment"
         android:label="fragment_my_second"
         tools:layout="@layout/orders_details_fragment">
-<!--        <argument-->
-<!--            android:name="arg3"-->
-<!--            app:argType="com.ycompany.yelectronics.network.dto.Product"-->
-<!--            app:nullable="true" />-->
-<!--        <action-->
-<!--            android:id="@+id/actionDetails"-->
-<!--            app:destination="@id/productDetailsFragment" />-->
 
     </fragment>
 

@@ -31,7 +31,7 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding>(), OnProductClick
     @Inject
     lateinit var customViewModelFactory: CustomViewModelFactory
 
-    val progressLoadingDialog: ProgressLoadingDialog by lazy {
+    private val progressLoadingDialog: ProgressLoadingDialog by lazy {
         ProgressLoadingDialog(
             requireActivity()
         )

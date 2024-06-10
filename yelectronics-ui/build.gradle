@@ -7,4 +7,6 @@ dependencies {
 
     api "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
     api "androidx.fragment:fragment:${androidXFragmentVersion}"
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.test:core-ktx:1.5.0'
 }

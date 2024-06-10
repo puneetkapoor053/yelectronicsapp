@@ -30,7 +30,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomCartLayout"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_cart_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mybag_text"
@@ -39,7 +39,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
-        android:id="@+id/bottomCartLayout"
+        android:id="@+id/bottom_cart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
@@ -62,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/metropolis_regular"
-                android:text="Total amount:"
+                android:text="@string/total_amount_title"
                 android:textColor="@color/textAd"
                 android:textSize="16sp" />
 
@@ -72,15 +72,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/metropolis_semibold"
-                android:gravity="right"
-                android:text="$120"
+                android:gravity="end"
+                tools:text="120"
                 android:textColor="@color/mainText"
                 android:textSize="18sp" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/checkOut_BagPage"
+            android:id="@+id/checkout_bag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -88,7 +88,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_bg"
-            android:text="CHECK OUT" />
+            android:text="@string/check_out" />
 
     </LinearLayout>
 
