@@ -24,7 +24,6 @@ import com.ycompany.yelectronics.viewmodel.StateData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<LoginFragmentBinding>() {
 
@@ -88,20 +87,17 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>() {
                             null,
                             null,
                             null,
-                            null)
-                    } else if (!TextUtils.isEmpty(emailEditText.text)
-                        && loginViewModel.isEmailValid(emailEditText.text.toString())) {
-                        emailEditText.setCompoundDrawablesWithIntrinsicBounds(
-                            null, null, ContextCompat.getDrawable(
-                                requireContext(),
-                                R.drawable.ic_check
-                            ), null
+                            null
                         )
-                        emailEditTextError.visibility = View.GONE
-                    }
+                    } else emailValidation()
                 }
 
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                     emailEditText.setCompoundDrawablesWithIntrinsicBounds(
                         null,
                         null,
@@ -109,19 +105,31 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>() {
                         null
                     )
                 }
+
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    if (!TextUtils.isEmpty(emailEditText.text)
-                        && loginViewModel.isEmailValid(emailEditText.text.toString())) {
-                        emailEditText.setCompoundDrawablesWithIntrinsicBounds(
-                                null, null, ContextCompat.getDrawable(
-                                    requireContext(),
-                                    R.drawable.ic_check
-                                ), null
-                            )
-                            emailEditTextError.visibility = View.GONE
-                        }
+                    emailValidation()
                 }
             })
+        }
+    }
+
+    private fun LoginFragmentBinding.emailValidation() {
+        if (!TextUtils.isEmpty(emailEditText.text)
+            && loginViewModel.isEmailValid(emailEditText.text.toString())
+        ) {
+            emailEditText.setCompoundDrawablesWithIntrinsicBounds(
+                null, null, ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_check
+                ), null
+            )
+        } else {
+            emailEditText.setCompoundDrawablesWithIntrinsicBounds(
+                null, null, ContextCompat.getDrawable(
+                    requireContext(),
+                    android.R.drawable.ic_delete
+                ), null
+            )
         }
     }
 
@@ -132,7 +140,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>() {
                 emailEditTextError.text = "Email Can't be Empty"
                 return
             }
-            if (loginViewModel.isEmailValid(emailEditText.text.toString())) {
+            if (!loginViewModel.isEmailValid(emailEditText.text.toString())) {
                 emailEditTextError.visibility = View.VISIBLE
                 emailEditTextError.text = "Enter Valid Email"
                 return
@@ -156,7 +164,9 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>() {
                 }
 
                 StateData.DataStatus.SUCCESS -> {
-                    sharedPreferences.edit().putString(Constants.PREF_USERNAME, binding?.emailEditText?.text.toString()).apply()
+                    sharedPreferences.edit()
+                        .putString(Constants.PREF_USERNAME, binding?.emailEditText?.text.toString())
+                        .apply()
                     progressLoadingDialog.dismissDialog()
                     activity?.applicationContext?.let { toast("Signed in successfully", it) }
 
@@ -188,9 +198,15 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>() {
                 }
 
                 StateData.DataStatus.SUCCESS -> {
-                    sharedPreferences.edit().putString(Constants.PREF_USERNAME, Constants.PREF_GUEST_USERNAME).apply()
+                    sharedPreferences.edit()
+                        .putString(Constants.PREF_USERNAME, Constants.PREF_GUEST_USERNAME).apply()
                     progressLoadingDialog.dismissDialog()
-                    activity?.applicationContext?.let { toast("Signed in as guest successfully", it) }
+                    activity?.applicationContext?.let {
+                        toast(
+                            "Signed in as guest successfully",
+                            it
+                        )
+                    }
 
                     val intent = Intent(context, HomeActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/metropolis_semibold"
         android:gravity="center"
-        android:text="My Orders"
+        android:text="@string/my_orders"
         android:textColor="@color/mainText"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/metropolis_semibold"
             android:gravity="center"
-            android:text="No Orders!!"
+            android:text="@string/no_orders"
             android:textColor="@color/textAd"
             android:textSize="25dp"/>
     </LinearLayout>

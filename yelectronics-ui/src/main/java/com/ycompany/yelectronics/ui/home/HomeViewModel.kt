@@ -1,6 +1,5 @@
 package com.ycompany.yelectronics.ui.home
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,12 +29,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getProductHighlightList(context: Context) {
+    fun getProductHighlightList() {
         productHighlightLiveData.postLoading()
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = productsRepository.getListOfHighlightProducts(context)
+                val result = productsRepository.getListOfHighlightProducts()
                 productHighlightLiveData.postSuccess(result as List<Product>)
             } catch (exception: Exception) {
                 productHighlightLiveData.postError(exception)
@@ -43,10 +42,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNewProductsList(context: Context) {
+    fun getNewProductsList() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = productsRepository.getListOfNewProducts(context)
+                val result = productsRepository.getListOfNewProducts()
                 productsLiveData.postSuccess(result as List<Product>)
             } catch (exception: Exception) {
                 productsLiveData.postError(exception)

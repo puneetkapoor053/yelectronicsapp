@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
 
     private lateinit var homeViewModel: HomeViewModel
 
-    val progressLoadingDialog: ProgressLoadingDialog by lazy {
+    private val progressLoadingDialog: ProgressLoadingDialog by lazy {
         ProgressLoadingDialog(
             requireActivity()
         )
@@ -76,10 +76,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
             viewLifecycleOwner, processNewProductsData()
         )
 
-        homeViewModel.getProductHighlightList(requireContext())
+        homeViewModel.getProductHighlightList()
+
         val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation?.visibility = View.VISIBLE
-
     }
 
     private fun processProductHighlightData(): (t: StateData<List<Product>>?) -> Unit = {
@@ -90,19 +90,17 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
                 }
 
                 StateData.DataStatus.SUCCESS -> {
-                    //progressLoadingDialog.dismissDialog()
                     setProductHighlightsRecyclerView(it.getData()).run {
-                        homeViewModel.getNewProductsList(requireContext())
+                        homeViewModel.getNewProductsList()
                     }
                 }
-
                 StateData.DataStatus.ERROR -> {
                     progressLoadingDialog.dismissDialog()
                 }
 
                 else -> {
                     progressLoadingDialog.dismissDialog()
-                    activity?.applicationContext?.let { Extensions.toast("Sign in failed", it) }
+                    activity?.applicationContext?.let { Extensions.toast("Please try again later!", it) }
                 }
             }
         }
@@ -111,10 +109,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
     private fun processNewProductsData(): (t: StateData<List<Product>>?) -> Unit = {
         if (it != null) {
             when (it.getStatus()) {
-                StateData.DataStatus.LOADING -> {
-                    //progressLoadingDialog.startLoadingDialog("Please wait!!")
-                }
-
                 StateData.DataStatus.SUCCESS -> {
                     progressLoadingDialog.dismissDialog()
                     setProductsRecyclerView(it.getData())
@@ -126,7 +120,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(),
 
                 else -> {
                     progressLoadingDialog.dismissDialog()
-                    activity?.applicationContext?.let { Extensions.toast("Sign in failed", it) }
+                    activity?.applicationContext?.let { Extensions.toast("Please try again later!", it) }
                 }
             }
         }

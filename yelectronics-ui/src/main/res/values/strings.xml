@@ -5,13 +5,18 @@
     <string name="total_amount">"Total Amount:&#160;₹&#160;"</string>
     <string name="rupees">"₹&#160;"</string>
     <string name="order_id_prefix">Order_</string>
-    <string name="empty_cart">Empty Cart</string>
-    <string name="order_success">Order Success</string>
-    <string name="order_more">Order More</string>
+    <string name="empty_cart">Empty cart</string>
+    <string name="order_success">Order success</string>
+    <string name="order_more">Order more</string>
     <string name="date_of_order">Date Of Order:&#160;</string>
     <string name="order_date_format">dd/MM/yyyy HH:mm aa</string>
     <string name="my_bag">My Bag</string>
     <string name="my_profile">My Profile</string>
     <string name="my_orders">My Orders</string>
     <string name="sign_out">Sign Out</string>
+    <string name="you_have_never_seen_before">You have never seen before</string>
+    <string name="new_title">New</string>
+    <string name="no_orders">No orders!!</string>
+    <string name="total_amount_title">Total amount:</string>
+    <string name="check_out">CHECK OUT</string>
 </resources>

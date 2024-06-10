@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import com.ycompany.yelectronics.network.database.OrdersListEntity
 import com.ycompany.yelectronics.ui.R
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -32,7 +31,7 @@ class OrderListAdapter(
         var sumOfAllProducts = 0
 
         order.listOfOrders.forEach { orderDetails ->
-            sumOfAllProducts = sumOfAllProducts + orderDetails.price * orderDetails.quantity
+            sumOfAllProducts += orderDetails.price * orderDetails.quantity
         }
 
         holder.orderTotalAmount.text =
@@ -41,10 +40,8 @@ class OrderListAdapter(
         holder.orderPaymentReference.text =
             "${context.getString(R.string.payment_reference)}${order.paymentReferenceId}"
         holder.dateOfOrder.text = "${context.getString(R.string.date_of_order)}" +
-                "${
-                    SimpleDateFormat(context.getString(R.string.order_date_format))
-                        .format(Date(order.dateOfOrder))
-                }"
+                SimpleDateFormat(context.getString(R.string.order_date_format))
+                    .format(Date(order.dateOfOrder))
 
         val layoutManager = LinearLayoutManager(
             holder.itemView.context,

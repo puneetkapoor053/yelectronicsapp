@@ -9,7 +9,7 @@ import androidx.room.Query
 interface FavoriteDao {
 
     @Query("SELECT * FROM favorite_items")
-    fun getAllFavoriteProducts(): List<FavoriteEntity>
+    suspend fun getAllFavoriteProducts(): List<FavoriteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteProduct(favorite: FavoriteEntity)
@@ -18,5 +18,5 @@ interface FavoriteDao {
     suspend fun removeFavoriteProduct(favoriteProductId: String)
 
     @Query("DELETE FROM favorite_items")
-    fun deleteAllFavoritesProducts()
+    suspend fun deleteAllFavoritesProducts()
 }

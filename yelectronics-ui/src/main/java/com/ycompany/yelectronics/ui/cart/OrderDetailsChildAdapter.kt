@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ycompany.yelectronics.network.database.Orders
+import com.ycompany.yelectronics.network.dto.Orders
 import com.ycompany.yelectronics.ui.R
 
 class OrderDetailsChildAdapter(

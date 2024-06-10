@@ -60,6 +60,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
                 startActivity(intent)
             }
         }
+
     }
 
     companion object {

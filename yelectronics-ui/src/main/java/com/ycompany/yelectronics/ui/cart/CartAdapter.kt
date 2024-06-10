@@ -24,12 +24,11 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-
-
         val cartItem: CartEntity = listOfCartProducts[position]
 
         holder.cartName.text = cartItem.name
-        holder.cartPrice.text = "₹ " + cartItem.price * cartItem.quantity
+        holder.cartPrice.text =
+            "${holder.itemView.context.getString(R.string.rupees)}${cartItem.price * cartItem.quantity}"
         holder.quantityTvCart.text = cartItem.quantity.toString()
         holder.cartMore.setOnClickListener {
 
@@ -47,9 +46,11 @@ class CartAdapter(
     override fun getItemCount(): Int {
         return listOfCartProducts.size
     }
+
     fun updateList(){
         notifyDataSetChanged()
     }
+
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cartImage: ImageView = itemView.findViewById(R.id.cartImage)

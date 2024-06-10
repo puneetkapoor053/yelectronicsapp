@@ -2,6 +2,7 @@ package com.ycompany.yelectronics.network.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.ycompany.yelectronics.network.dto.Orders
 
 class Converters {
 

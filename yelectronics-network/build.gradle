@@ -15,6 +15,9 @@ dependencies {
     api "com.squareup.retrofit2:converter-jackson:${retrofitVersion}"
 
     api "androidx.preference:preference-ktx:${preference}"
+    implementation 'androidx.test:core-ktx:1.5.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
 
     testImplementation "androidx.arch.core:core-testing:${core_testing}"
+    androidTestImplementation "androidx.arch.core:core-testing:${core_testing}"
 }

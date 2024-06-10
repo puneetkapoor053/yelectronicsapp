@@ -1,6 +1,7 @@
 package com.ycompany.yelectronics.ui.login
 
 import android.util.Patterns
+import androidx.core.util.PatternsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -47,6 +48,7 @@ class LoginViewModel @Inject constructor(
             firebaseAuth.signOut()
             favoritesRepository.deleteAllFavorites()
             cartRepository.deleteAllCartItems()
+            cartRepository.deleteAllOrders()
         }
     }
 
@@ -59,6 +61,6 @@ class LoginViewModel @Inject constructor(
     }
 
     fun isEmailValid(email: String): Boolean {
-        return !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

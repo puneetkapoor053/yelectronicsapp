@@ -11,15 +11,16 @@ import com.ycompany.yelectronics.network.dto.Product
 import java.io.IOException
 import javax.inject.Inject
 
-class ProductsUseCase @Inject constructor(
+open class ProductsUseCase @Inject constructor(
     private val gson: Gson, private val assetManager: AssetManager,
     private val productHighlightDao: ProductHighlightDao,
     private val productsDao: ProductsDao
 ) {
-
+    /* API call */
     suspend fun getProductHighlightList(fileName: String): List<Product> {
         val listCoverType = object : TypeToken<List<Product>>() {}.type
         val list: List<Product> = gson.fromJson(getJsonData(fileName), listCoverType)
+
         val listEntity: List<ProductHighlightEntity> =
             list.map { ProductHighlightEntity.toEntity(it) }
         // Storing the details in the DB
@@ -29,6 +30,7 @@ class ProductsUseCase @Inject constructor(
         return list
     }
 
+    /* API call */
     suspend fun getAllNewProducts(fileName: String): List<Product> {
         val listCoverType = object : TypeToken<List<Product>>() {}.type
         val list: List<Product> = gson.fromJson(getJsonData(fileName), listCoverType)
@@ -41,7 +43,7 @@ class ProductsUseCase @Inject constructor(
         return list
     }
 
-    private suspend fun getJsonData(fileName: String): String? {
+    private fun getJsonData(fileName: String): String? {
         // Delay added just to show the progress running in case of device connected to the internet.
         val jsonString: String
         try {

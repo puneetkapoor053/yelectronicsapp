@@ -29,7 +29,7 @@ class ProductsAdapter(
 
         holder.productBrandName.text = product.productBrand
         holder.productName.text = product.productName
-        holder.productPrice.text = "$" + product.productPrice
+        holder.productPrice.text = "${holder.itemView.context.getString(R.string.rupees)}${product.productPrice}"
         holder.productRating.rating = product.productRating
 
         Glide.with(holder.itemView.context)
@@ -37,12 +37,12 @@ class ProductsAdapter(
             .placeholder(R.drawable.bn)
             .into(holder.productImage)
 
-
         if (product.productHave) {
             holder.discountProductText.text = product.productDisCount
             holder.discountLayout.visibility = View.VISIBLE
         }
 
+        // To check if the product is New or not.
         if (!product.productHave) {
             holder.discountLayout.visibility = View.VISIBLE
             holder.discountProductText.text = "New"

@@ -1,6 +1,5 @@
 package com.ycompany.yelectronics.network.repository
 
-import androidx.lifecycle.LiveData
 import com.ycompany.yelectronics.network.database.CartDao
 import com.ycompany.yelectronics.network.database.CartEntity
 import com.ycompany.yelectronics.network.database.OrdersListEntity
@@ -22,14 +21,6 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         cartDao.update(product)
     }
 
-    suspend fun insertOrders(order: OrdersListEntity) {
-        cartDao.insertOrder(order)
-    }
-
-    suspend fun getAllOrders(): List<OrdersListEntity> {
-        return cartDao.getAllOrders()
-    }
-
     suspend fun getAllCartItems(): List<CartEntity> {
         return cartDao.getAllCartItems()
     }
@@ -38,7 +29,20 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         return cartDao.deleteAll()
     }
 
+    suspend fun deleteAllOrders() {
+        return cartDao.deleteAllOrders()
+    }
+
     suspend fun getCartItem(productId: String): CartEntity? {
         return cartDao.getCartItem(productId)
+    }
+
+    /* Orders */
+    suspend fun insertOrders(order: OrdersListEntity) {
+        cartDao.insertOrder(order)
+    }
+
+    suspend fun getAllOrders(): List<OrdersListEntity> {
+        return cartDao.getAllOrders()
     }
 }

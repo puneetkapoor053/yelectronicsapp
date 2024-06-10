@@ -1,4 +1,6 @@
-package com.ycompany.yelectronics.network.database
+package com.ycompany.yelectronics.network.dto
+
+import com.ycompany.yelectronics.network.database.CartEntity
 
 data class Orders(
     var name: String,
